@@ -6,27 +6,27 @@ const YEAR_S = 365.25 * 24 * 3600;
 const G0 = 9.80665;
 
 const fallbackSolvers = [
-  ["GS-01","Mission & Relativity","ACTIVE","Distanz, Reisezeit, Eigenzeit, SR-Designhülle"],
-  ["GS-02","Propulsion","PLANNED","Antriebskandidaten, Schub, Δv, Massenverhältnis"],
-  ["GS-03","Energy","PLANNED","Erzeugung, Speicherung, Leistungsbudget"],
-  ["GS-04","Thermal","PLANNED","Abwärme, Radiatoren, Temperaturregime"],
-  ["GS-05","Structure & Rotation","PLANNED","Tragstruktur, künstliche Gravitation, Dynamik"],
+  ["GS-01","Mission & Relativity","ACTIVE","Distanz, Reisezeit, Eigenzeit und SR-Designhülle"],
+  ["GS-02","Propulsion","PLANNED","Antriebskandidaten, Schub, Δv und Massenverhältnis"],
+  ["GS-03","Energy","PLANNED","Erzeugung, Speicherung und Leistungsbudget"],
+  ["GS-04","Thermal","PLANNED","Abwärme, Radiatoren und Temperaturregime"],
+  ["GS-05","Structure & Rotation","PLANNED","Tragstruktur, künstliche Gravitation und Dynamik"],
   ["GS-06","Radiation & High-Speed Impact","PLANNED","GCR, Partikel, Staub und Schutzsysteme"],
-  ["GS-07","Life Support","PLANNED","Luft, Wasser, Stoffkreisläufe"],
-  ["GS-08","Biosphere & Agriculture","PLANNED","Nahrung, Ökosystem, Landwirtschaft"],
-  ["GS-09","Population & Genetics","PLANNED","Demografie, Ne, Drift, Genbank"],
+  ["GS-07","Life Support","PLANNED","Luft, Wasser und Stoffkreisläufe"],
+  ["GS-08","Biosphere & Agriculture","PLANNED","Nahrung, Ökosystem und Landwirtschaft"],
+  ["GS-09","Population & Genetics","PLANNED","Demografie, effektive Population, Drift und Genbank"],
   ["GS-10","Medicine","PLANNED","Medizinische Autonomie und Bioproduktion"],
-  ["GS-11","Industry & Raw Materials","PLANNED","Rohstoffe, Metallurgie, Chemie"],
-  ["GS-12","Manufacturing & Repair","PLANNED","Fertigung, Ersatzteile, Maschinenkreislauf"],
-  ["GS-13","Robotics & Autonomy","PLANNED","Robotik, Wartung, autonome Operation"],
-  ["GS-14","Computing & Knowledge Archive","PLANNED","Rechner, Daten, Wissenskontinuität"],
-  ["GS-15","Governance & Society","PLANNED","Institutionen, Gesellschaft, Langzeitstabilität"],
-  ["GS-16","Navigation & Communications","PLANNED","Trajektorie, Sensorik, Kommunikation"],
-  ["GS-17","Science","PLANNED","Forschung, Beobachtung, Missionswissenschaft"],
-  ["GS-18","Auxiliary Craft & Probes","PLANNED","Sonden, Lander, Reparaturfahrzeuge"],
-  ["GS-19","Safety, Reliability & Redundancy","PLANNED","Fehlertoleranz, Katastrophen, Redundanz"],
+  ["GS-11","Industry & Raw Materials","PLANNED","Rohstoffe, Metallurgie und Chemie"],
+  ["GS-12","Manufacturing & Repair","PLANNED","Fertigung, Ersatzteile und Maschinenkreislauf"],
+  ["GS-13","Robotics & Autonomy","PLANNED","Robotik, Wartung und autonome Operation"],
+  ["GS-14","Computing & Knowledge Archive","PLANNED","Rechner, Daten und Wissenskontinuität"],
+  ["GS-15","Governance & Society","PLANNED","Institutionen, Gesellschaft und Langzeitstabilität"],
+  ["GS-16","Navigation & Communications","PLANNED","Trajektorie, Sensorik und Kommunikation"],
+  ["GS-17","Science","PLANNED","Forschung, Beobachtung und Missionswissenschaft"],
+  ["GS-18","Auxiliary Craft & Probes","PLANNED","Sonden, Lander und Reparaturfahrzeuge"],
+  ["GS-19","Safety, Reliability & Redundancy","PLANNED","Fehlertoleranz, Katastrophen und Redundanz"],
   ["GS-20","HZT Interface","PLANNED_FIREWALLED","Isolierter Forschungs- und Upgrade-Pfad"]
-].map(([id,name,status,summary]) => ({id,name,status,summary}));
+].map(([id,name,status,summary]) => ({id,name,status,summary,evidence:"OPEN",depends_on:[],outputs:[],next_gate:"Noch nicht veröffentlicht"}));
 
 const $ = (id) => document.getElementById(id);
 const de = new Intl.NumberFormat("de-DE", {maximumFractionDigits: 2});
@@ -44,6 +44,9 @@ function formatEnergy(jkg){
   return `${de.format(jkg)} J`;
 }
 function fixed(value, digits=4){ return Number(value).toLocaleString("de-DE",{maximumFractionDigits:digits}); }
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>'"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[ch]));
+}
 
 function updateMission(){
   const Dly = Number($("distance").value);
@@ -124,13 +127,37 @@ function stateLabel(status){
   if(status.includes("FIREWALLED")) return "FIREWALLED";
   return "PLANNED";
 }
+
+function openSolverDialog(solver){
+  const dialog = $("solver-dialog");
+  const deps = solver.depends_on?.length ? solver.depends_on.map(x=>`<span>${escapeHtml(x)}</span>`).join("") : "<em>Keine vorgelagerten Solver veröffentlicht.</em>";
+  const outputs = solver.outputs?.length ? solver.outputs.map(x=>`<li>${escapeHtml(x)}</li>`).join("") : "<li>Noch keine öffentlichen Outputs.</li>";
+  $("solver-dialog-content").innerHTML = `
+    <p class="eyebrow">${escapeHtml(solver.id)} · SOLVER DETAIL</p>
+    <div class="dialog-title"><h2>${escapeHtml(solver.name)}</h2><span class="solver-state ${stateClass(solver.status)}">${stateLabel(solver.status)}</span></div>
+    <p class="dialog-summary">${escapeHtml(solver.summary)}</p>
+    <div class="dialog-grid">
+      <section><span>Evidenzstatus</span><strong>${escapeHtml(solver.evidence || "OPEN")}</strong></section>
+      <section><span>Nächstes Gate</span><strong>${escapeHtml(solver.next_gate || "OPEN")}</strong></section>
+    </div>
+    <div class="dialog-block"><span>Abhängigkeiten</span><div class="dependency-tags">${deps}</div></div>
+    <div class="dialog-block"><span>Öffentliche Ziel-Outputs</span><ul>${outputs}</ul></div>
+    <p class="dialog-firewall">Detailansicht = veröffentlichter Projektstatus. Sie ist keine technische Freigabe und enthält keine privaten Solver-Implementierungen.</p>`;
+  if(typeof dialog.showModal === "function") dialog.showModal(); else dialog.setAttribute("open", "");
+}
+
 function renderSolvers(solvers, filter="ALL"){
   const visible = solvers.filter(s => filter === "ALL" || (filter === "FIREWALLED" ? s.status.includes("FIREWALLED") : s.status === filter));
   $("solver-grid").innerHTML = visible.map(s=>`
-    <article class="solver-card">
-      <header><span class="solver-id">${s.id}</span><span class="solver-state ${stateClass(s.status)}">${stateLabel(s.status)}</span></header>
-      <h3>${s.name}</h3><p>${s.summary || "Workstream gemäß GSRA Solver Registry."}</p>
-    </article>`).join("");
+    <button class="solver-card" type="button" data-solver="${escapeHtml(s.id)}" aria-label="${escapeHtml(s.id)} ${escapeHtml(s.name)} öffnen">
+      <header><span class="solver-id">${escapeHtml(s.id)}</span><span class="solver-state ${stateClass(s.status)}">${stateLabel(s.status)}</span></header>
+      <h3>${escapeHtml(s.name)}</h3><p>${escapeHtml(s.summary || "Workstream gemäß GSRA Solver Registry.")}</p>
+      <span class="solver-open">DETAILS →</span>
+    </button>`).join("");
+  visible.forEach(solver => {
+    const card = document.querySelector(`[data-solver="${solver.id}"]`);
+    if(card) card.addEventListener("click", ()=>openSolverDialog(solver));
+  });
 }
 
 async function loadSolvers(){
@@ -150,5 +177,8 @@ async function loadSolvers(){
 $("distance").addEventListener("input",updateMission);
 $("beta").addEventListener("input",updateMission);
 $("acceleration").addEventListener("change",updateMission);
+$("solver-dialog").addEventListener("click", event => {
+  if(event.target === $("solver-dialog")) $("solver-dialog").close();
+});
 updateMission();
 loadSolvers();
