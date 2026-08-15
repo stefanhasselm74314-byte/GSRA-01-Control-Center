@@ -1,0 +1,22 @@
+[
+  {"id":"GS-01","name":"Mission & Relativity","status":"ACTIVE","summary":"Distanz, Reisezeit, Eigenzeit, SR-Designhülle"},
+  {"id":"GS-02","name":"Propulsion","status":"PLANNED","summary":"Antriebskandidaten, Schub, Δv, Massenverhältnis"},
+  {"id":"GS-03","name":"Energy","status":"PLANNED","summary":"Erzeugung, Speicherung, Leistungsbudget"},
+  {"id":"GS-04","name":"Thermal","status":"PLANNED","summary":"Abwärme, Radiatoren, Temperaturregime"},
+  {"id":"GS-05","name":"Structure & Rotation","status":"PLANNED","summary":"Tragstruktur, künstliche Gravitation, Dynamik"},
+  {"id":"GS-06","name":"Radiation & High-Speed Impact","status":"PLANNED","summary":"GCR, Partikel, Staub und Schutzsysteme"},
+  {"id":"GS-07","name":"Life Support","status":"PLANNED","summary":"Luft, Wasser, Stoffkreisläufe"},
+  {"id":"GS-08","name":"Biosphere & Agriculture","status":"PLANNED","summary":"Nahrung, Ökosystem, Landwirtschaft"},
+  {"id":"GS-09","name":"Population & Genetics","status":"PLANNED","summary":"Demografie, effektive Population, Drift, Genbank"},
+  {"id":"GS-10","name":"Medicine","status":"PLANNED","summary":"Medizinische Autonomie und Bioproduktion"},
+  {"id":"GS-11","name":"Industry & Raw Materials","status":"PLANNED","summary":"Rohstoffe, Metallurgie, Chemie"},
+  {"id":"GS-12","name":"Manufacturing & Repair","status":"PLANNED","summary":"Fertigung, Ersatzteile, Maschinenkreislauf"},
+  {"id":"GS-13","name":"Robotics & Autonomy","status":"PLANNED","summary":"Robotik, Wartung, autonome Operation"},
+  {"id":"GS-14","name":"Computing & Knowledge Archive","status":"PLANNED","summary":"Rechner, Daten und Wissenskontinuität"},
+  {"id":"GS-15","name":"Governance & Society","status":"PLANNED","summary":"Institutionen, Gesellschaft, Langzeitstabilität"},
+  {"id":"GS-16","name":"Navigation & Communications","status":"PLANNED","summary":"Trajektorie, Sensorik und Kommunikation"},
+  {"id":"GS-17","name":"Science","status":"PLANNED","summary":"Forschung, Beobachtung, Missionswissenschaft"},
+  {"id":"GS-18","name":"Auxiliary Craft & Probes","status":"PLANNED","summary":"Sonden, Lander und Reparaturfahrzeuge"},
+  {"id":"GS-19","name":"Safety, Reliability & Redundancy","status":"PLANNED","summary":"Fehlertoleranz, Katastrophen und Redundanz"},
+  {"id":"GS-20","name":"HZT Interface","status":"PLANNED_FIREWALLED","summary":"Isolierter Forschungs- und Upgrade-Pfad"}
+]

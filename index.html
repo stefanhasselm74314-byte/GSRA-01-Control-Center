@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="GSRA-01 Control Center — interaktive öffentliche Oberfläche für die Generation Ship Reference Architecture.">
+  <title>GSRA-01 Control Center</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="GSRA-01 Start">
+      <span class="brand-mark">G</span>
+      <span><strong>GSRA-01</strong><small>CONTROL CENTER</small></span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#mission">Mission</a>
+      <a href="#solvers">Solver</a>
+      <a href="#architecture">Architektur</a>
+      <a href="#hzt">HZT</a>
+    </nav>
+    <span class="top-status"><i></i> v0.1 ONLINE</span>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">GENERATION SHIP REFERENCE ARCHITECTURE</p>
+        <h1>Ein Schiff als<br><span>mobile Zivilisation.</span></h1>
+        <p class="lead">Interaktive Systemoberfläche für Mission, Relativistik, Solverstatus und Architektur. Alle Werte bleiben evidenzklassifiziert; Kinematik ist keine Antriebsfreigabe.</p>
+      </div>
+      <div class="mission-orbit" aria-label="Konzeptionelle Missionsdarstellung">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="sun">SOL</div><div class="gc">Sgr A*</div>
+        <div class="ship">GSRA</div>
+      </div>
+    </section>
+
+    <section class="firewall" role="note">
+      <strong>WISSENSCHAFTLICHER FIREWALL</strong>
+      <span>kinematisch lösbar ≠ antreibbar ≠ energetisch geschlossen ≠ baubar</span>
+    </section>
+
+    <section id="mission" class="panel-section">
+      <div class="section-head">
+        <div><p class="eyebrow">GS-01 · MISSION & RELATIVITY</p><h2>Mission Design Envelope</h2></div>
+        <span class="badge badge-active">NUMERISCH BESTÄTIGT</span>
+      </div>
+
+      <div class="control-grid">
+        <article class="control-card">
+          <label for="distance">Arbeitsdistanz <output id="distance-out">26.000 ly</output></label>
+          <input id="distance" type="range" min="1000" max="30000" step="100" value="26000">
+          <div class="range-note"><span>1.000 ly</span><span>30.000 ly</span></div>
+        </article>
+        <article class="control-card">
+          <label for="beta">Reisegeschwindigkeit β = v/c <output id="beta-out">0,20 c</output></label>
+          <input id="beta" type="range" min="0.01" max="0.99" step="0.01" value="0.20">
+          <div class="range-note"><span>0,01 c</span><span>0,99 c</span></div>
+        </article>
+        <article class="control-card">
+          <label for="acceleration">Eigenbeschleunigungs-Hülle</label>
+          <select id="acceleration">
+            <option value="0.0980665">0,01 g</option>
+            <option value="0.980665" selected>0,10 g</option>
+            <option value="9.80665">1,00 g</option>
+          </select>
+          <p>Nur ideale SR-Hülle: Ruhe → Beschleunigen → Bremsen → Ruhe.</p>
+        </article>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric"><span>Lorentzfaktor</span><strong id="gamma">1,0206</strong><small>γ(β)</small></article>
+        <article class="metric"><span>Außenzeit</span><strong id="coord-time">130.000 a</strong><small>Galaktischer Bezug</small></article>
+        <article class="metric"><span>Eigenzeit</span><strong id="proper-time">127.373 a</strong><small>an Bord</small></article>
+        <article class="metric"><span>kin. Energie / kg</span><strong id="energy">1,85 PJ</strong><small>nur Nutz-/Ruhemasse, ohne Wirkungsgrad</small></article>
+      </div>
+
+      <div class="analysis-grid">
+        <article class="chart-card">
+          <div class="card-title"><div><span>Trade Space</span><strong>Reisezeit vs. β</strong></div><div class="legend"><span class="l-coord">Außenzeit</span><span class="l-proper">Eigenzeit</span></div></div>
+          <svg id="trade-chart" viewBox="0 0 760 300" role="img" aria-label="Reisezeitkurven in Abhängigkeit von Beta"></svg>
+        </article>
+        <article class="envelope-card">
+          <span>Eigenbeschleunigungs-Hülle</span>
+          <strong id="accel-label">0,10 g</strong>
+          <dl>
+            <div><dt>Außenzeit</dt><dd id="accel-coord">—</dd></div>
+            <div><dt>Eigenzeit</dt><dd id="accel-proper">—</dd></div>
+            <div><dt>β max</dt><dd id="accel-beta">—</dd></div>
+            <div><dt>γ max</dt><dd id="accel-gamma">—</dd></div>
+            <div><dt>q = aD/(2c²)</dt><dd id="accel-q">—</dd></div>
+          </dl>
+          <p class="warning">Keine Antriebsfreigabe. Energie, Reaktionsmasse, Wärme und Schutz liegen außerhalb von GS-01.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="solvers" class="panel-section">
+      <div class="section-head">
+        <div><p class="eyebrow">SYSTEM ENGINEERING</p><h2>20 Solver-Workstreams</h2></div>
+        <div class="filters" role="group" aria-label="Solver filtern">
+          <button class="filter active" data-filter="ALL">Alle</button>
+          <button class="filter" data-filter="ACTIVE">Aktiv</button>
+          <button class="filter" data-filter="PLANNED">Geplant</button>
+          <button class="filter" data-filter="FIREWALLED">HZT</button>
+        </div>
+      </div>
+      <div id="solver-grid" class="solver-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="architecture" class="panel-section">
+      <div class="section-head"><div><p class="eyebrow">SYSTEMEBENE</p><h2>Architekturfluss</h2></div><span class="badge badge-open">NOCH NICHT GEFROREN</span></div>
+      <div class="architecture-flow">
+        <article><b>01</b><strong>Mission</strong><span>Distanz · Zeit · Relativistik</span></article>
+        <i>→</i><article><b>02</b><strong>Antrieb & Energie</strong><span>Δv · Leistung · Wärme</span></article>
+        <i>→</i><article><b>03</b><strong>Schutz & Struktur</strong><span>Staub · Strahlung · Rotation</span></article>
+        <i>→</i><article><b>04</b><strong>Zivilisation</strong><span>Population · Biosphäre · Industrie</span></article>
+        <i>→</i><article><b>05</b><strong>Closure</strong><span>Masse · Ressourcen · Redundanz</span></article>
+      </div>
+      <div class="evidence-grid">
+        <article><span class="dot proven"></span><strong>bewiesen / etabliert</strong><p>Physik oder formale Governance mit belastbarer Grundlage.</p></article>
+        <article><span class="dot numeric"></span><strong>numerisch bestätigt</strong><p>Implementierung durch reproduzierbare Tests abgesichert.</p></article>
+        <article><span class="dot conditional"></span><strong>konditional</strong><p>Arbeitsannahme oder Designfall; keine Architekturfreigabe.</p></article>
+        <article><span class="dot open"></span><strong>offen</strong><p>Noch nicht ausreichend gekoppelt oder identifiziert.</p></article>
+      </div>
+    </section>
+
+    <section id="hzt" class="panel-section hzt-panel">
+      <div>
+        <p class="eyebrow">GS-20 · HZT INTERFACE</p>
+        <h2>6D-Hyperzeit bleibt ein isolierter Upgrade-Pfad.</h2>
+        <p>GSRA-01 darf für Missionsüberleben, Antrieb oder Grundversorgung keine unbestätigte HZT-Technologie voraussetzen. HZT-Module werden erst nach Herleitung, Evidenz und Engineering-Closure promoted.</p>
+      </div>
+      <div class="hzt-state">
+        <span>HZT PROPULSION</span><strong>BLOCKED</strong><small>keine missionskritische Verwendung</small>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>GSRA-01 Control Center v0.1</span>
+    <span>Öffentliche Visualisierung · privater Forschungskern getrennt</span>
+    <a href="https://github.com/stefanhasselm74314-byte/GSRA-01-Control-Center">Public Repository</a>
+  </footer>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
