@@ -1,0 +1,35 @@
+{
+  "project": "GSRA-01 Control Center",
+  "release": "0.2.0",
+  "published_date": "2026-08-15",
+  "research_state": "GS-01 / DESIGN_ENVELOPE_v0.2",
+  "publication_boundary": "controlled_export_only",
+  "private_runtime_dependency": false,
+  "solver_counts": {
+    "active": 1,
+    "planned": 18,
+    "firewalled": 1
+  },
+  "critical_gates": {
+    "cruise_velocity_freeze": {
+      "status": "OPEN",
+      "requires": ["GS-02", "GS-03", "GS-06", "GS-09", "GS-16", "GS-19"]
+    },
+    "mass_architecture_freeze": {
+      "status": "OPEN"
+    },
+    "civilization_closure": {
+      "status": "OPEN"
+    }
+  },
+  "budgets": {
+    "dry_mass": "OPEN",
+    "power": "OPEN",
+    "thermal_rejection": "OPEN",
+    "population": "OPEN",
+    "habitat_geometry": "OPEN",
+    "shield_mass": "OPEN"
+  },
+  "hzt_propulsion": "BLOCKED",
+  "scientific_firewall": "kinematic_solution != propulsion_feasibility != energy_thermal_closure != engineering_realizability"
+}

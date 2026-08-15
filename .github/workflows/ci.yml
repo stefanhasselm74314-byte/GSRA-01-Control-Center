@@ -17,7 +17,18 @@ jobs:
           python-version: '3.12'
       - name: Validate JavaScript syntax
         run: node --check assets/app.js
-      - name: Validate solver JSON
-        run: python -m json.tool data/solvers.json > /dev/null
+      - name: Validate public JSON
+        run: |
+          python -m json.tool data/solvers.json > /dev/null
+          python -m json.tool data/public-state.json > /dev/null
       - name: Validate required static files
-        run: test -f index.html && test -f assets/styles.css && test -f .nojekyll
+        run: |
+          test -f index.html
+          test -f assets/styles.css
+          test -f assets/app.js
+          test -f data/solvers.json
+          test -f data/public-state.json
+          test -f CHANGELOG.md
+          test -f .nojekyll
+      - name: Validate public solver count
+        run: python -c "import json; d=json.load(open('data/solvers.json')); assert len(d)==20; assert sum(1 for s in d if s['status']=='ACTIVE')==1; assert sum(1 for s in d if 'FIREWALLED' in s['status'])==1"

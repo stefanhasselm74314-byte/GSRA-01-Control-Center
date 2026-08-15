@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#07111f">
-  <meta name="description" content="GSRA-01 Control Center — interaktive öffentliche Oberfläche für die Generation Ship Reference Architecture.">
+  <meta name="description" content="GSRA-01 Control Center v0.2 — öffentliche Projektzentrale für die Generation Ship Reference Architecture.">
   <title>GSRA-01 Control Center</title>
   <link rel="stylesheet" href="assets/styles.css">
 </head>
@@ -17,11 +17,13 @@
     </a>
     <nav class="nav" aria-label="Hauptnavigation">
       <a href="#mission">Mission</a>
+      <a href="#status">Status</a>
       <a href="#solvers">Solver</a>
-      <a href="#architecture">Architektur</a>
+      <a href="#ship">Schiff</a>
+      <a href="#budgets">Budgets</a>
       <a href="#hzt">HZT</a>
     </nav>
-    <span class="top-status"><i></i> v0.1 ONLINE</span>
+    <span class="top-status"><i></i> v0.2 ONLINE</span>
   </header>
 
   <main id="top">
@@ -29,7 +31,13 @@
       <div>
         <p class="eyebrow">GENERATION SHIP REFERENCE ARCHITECTURE</p>
         <h1>Ein Schiff als<br><span>mobile Zivilisation.</span></h1>
-        <p class="lead">Interaktive Systemoberfläche für Mission, Relativistik, Solverstatus und Architektur. Alle Werte bleiben evidenzklassifiziert; Kinematik ist keine Antriebsfreigabe.</p>
+        <p class="lead">Öffentliche Projektzentrale für Mission, Relativistik, Solverstatus, Systemarchitektur und Freigabegates. Die Oberfläche zeigt nur kontrolliert veröffentlichte Zustände; der kanonische Forschungskern bleibt getrennt und privat.</p>
+        <div class="hero-pills" aria-label="Projektzustand">
+          <span>GS-01 DESIGN ENVELOPE v0.2</span>
+          <span>1 ACTIVE</span>
+          <span>18 PLANNED</span>
+          <span>1 FIREWALLED</span>
+        </div>
       </div>
       <div class="mission-orbit" aria-label="Konzeptionelle Missionsdarstellung">
         <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
@@ -75,7 +83,7 @@
         <article class="metric"><span>Lorentzfaktor</span><strong id="gamma">1,0206</strong><small>γ(β)</small></article>
         <article class="metric"><span>Außenzeit</span><strong id="coord-time">130.000 a</strong><small>Galaktischer Bezug</small></article>
         <article class="metric"><span>Eigenzeit</span><strong id="proper-time">127.373 a</strong><small>an Bord</small></article>
-        <article class="metric"><span>kin. Energie / kg</span><strong id="energy">1,85 PJ</strong><small>nur Nutz-/Ruhemasse, ohne Wirkungsgrad</small></article>
+        <article class="metric"><span>kin. Energie / kg</span><strong id="energy">1,85 PJ</strong><small>nur Ruhemasse, ohne Wirkungsgrad</small></article>
       </div>
 
       <div class="analysis-grid">
@@ -98,9 +106,27 @@
       </div>
     </section>
 
+    <section id="status" class="panel-section">
+      <div class="section-head">
+        <div><p class="eyebrow">PROGRAMMSTATUS</p><h2>Freigabematrix</h2></div>
+        <span class="badge badge-open">CRUISE SPEED: OPEN</span>
+      </div>
+      <div class="status-overview">
+        <article class="status-card"><span>Aktiver Solver</span><strong>GS-01</strong><small>Mission & Relativity · Design Envelope v0.2</small></article>
+        <article class="status-card"><span>Geschwindigkeits-Freeze</span><strong>6 Gates</strong><small>GS-02 · 03 · 06 · 09 · 16 · 19</small></article>
+        <article class="status-card"><span>System Closure</span><strong>OFFEN</strong><small>Masse · Energie · Wärme · Population · Ressourcen</small></article>
+        <article class="status-card"><span>HZT-Antrieb</span><strong class="danger-text">BLOCKED</strong><small>keine missionskritische Verwendung</small></article>
+      </div>
+      <div class="gate-matrix" aria-label="Kritische Freigabegates">
+        <article><header><b>GATE V</b><span class="gate-wait">WAITING</span></header><strong>Cruise Velocity Freeze</strong><p>Erfordert gemeinsame Verträglichkeit von Antrieb, Energie, Schutz, Population, Navigation und Zuverlässigkeit.</p><div class="gate-tags"><span>GS-02</span><span>GS-03</span><span>GS-06</span><span>GS-09</span><span>GS-16</span><span>GS-19</span></div></article>
+        <article><header><b>GATE M</b><span class="gate-wait">WAITING</span></header><strong>Mass Architecture Freeze</strong><p>Erst nach Habitat-, Industrie-, Biosphäre-, Schutz- und Antriebsdimensionierung zulässig.</p><div class="gate-tags"><span>GS-05</span><span>GS-07</span><span>GS-08</span><span>GS-11</span><span>GS-12</span></div></article>
+        <article><header><b>GATE C</b><span class="gate-wait">WAITING</span></header><strong>Civilization Closure</strong><p>Population, Medizin, Wissenskontinuität, Governance und industrielle Reproduzierbarkeit müssen gemeinsam schließen.</p><div class="gate-tags"><span>GS-09</span><span>GS-10</span><span>GS-12</span><span>GS-14</span><span>GS-15</span></div></article>
+      </div>
+    </section>
+
     <section id="solvers" class="panel-section">
       <div class="section-head">
-        <div><p class="eyebrow">SYSTEM ENGINEERING</p><h2>20 Solver-Workstreams</h2></div>
+        <div><p class="eyebrow">SYSTEM ENGINEERING</p><h2>20 Solver-Workstreams</h2><p class="section-note">Karte antippen für Abhängigkeiten, Outputs und nächstes Gate.</p></div>
         <div class="filters" role="group" aria-label="Solver filtern">
           <button class="filter active" data-filter="ALL">Alle</button>
           <button class="filter" data-filter="ACTIVE">Aktiv</button>
@@ -109,6 +135,32 @@
         </div>
       </div>
       <div id="solver-grid" class="solver-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="ship" class="panel-section">
+      <div class="section-head"><div><p class="eyebrow">KONZEPTUELLE SYSTEMARCHITEKTUR</p><h2>Schiffsquerschnitt v0.2</h2></div><span class="badge badge-open">NICHT DIMENSIONIERT</span></div>
+      <p class="section-note">Die Darstellung beschreibt Funktionszonen und Reihenfolge, keine eingefrorene Geometrie, Länge oder Masse.</p>
+      <div class="ship-layout" aria-label="Konzeptioneller axialer Aufbau des Generationsschiffs">
+        <div class="zone z-shield"><b>01</b><strong>Forward Shield</strong><span>Sensorik · Interceptor · Staub-/Partikelschutz</span></div>
+        <div class="zone z-industry"><b>02</b><strong>Ressourcen & Industrie</strong><span>Tanks · Rohstoffe · Fertigung · Reparatur</span></div>
+        <div class="zone z-hab"><b>03</b><strong>Habitat Cluster</strong><span>Rotation · Wohnen · Gesellschaft · Redundanz</span></div>
+        <div class="zone z-bio"><b>04</b><strong>Biosphäre</strong><span>Landwirtschaft · Wasser · Luft · Stoffkreisläufe</span></div>
+        <div class="zone z-core"><b>05</b><strong>Zivilisationskern</strong><span>Medizin · Genbank · Archive · Computing</span></div>
+        <div class="zone z-power"><b>06</b><strong>Energie & Thermal</strong><span>Erzeugung · Verteilung · Speicher · Radiatoren</span></div>
+        <div class="zone z-drive"><b>07</b><strong>Propulsion</strong><span>Antriebskandidat noch offen · HZT nicht missionskritisch</span></div>
+      </div>
+    </section>
+
+    <section id="budgets" class="panel-section">
+      <div class="section-head"><div><p class="eyebrow">MASTER-SOLVER INPUTS</p><h2>Systembudgets</h2></div><span class="badge badge-open">KEINE SCHEINPRÄZISION</span></div>
+      <div class="budget-grid">
+        <article><header><span>Trockenmasse</span><b>OPEN</b></header><strong>—</strong><p>Resultat aus Struktur, Habitat, Industrie, Schutz, Energie und Antrieb.</p><small>Owner: GS-05 + Master Solver</small></article>
+        <article><header><span>Leistung</span><b>OPEN</b></header><strong>—</strong><p>Erzeugung, Spitzenlast, Speicher und Wirkungsgrad noch nicht gekoppelt.</p><small>Owner: GS-03</small></article>
+        <article><header><span>Abwärme</span><b>OPEN</b></header><strong>—</strong><p>Radiatorfläche darf erst aus Leistungs- und Temperaturregime folgen.</p><small>Owner: GS-04</small></article>
+        <article><header><span>Population</span><b>OPEN</b></header><strong>—</strong><p>Demografie, effektive Population, Genetik und Katastrophenreserve offen.</p><small>Owner: GS-09</small></article>
+        <article><header><span>Habitat</span><b>OPEN</b></header><strong>—</strong><p>Radius, Drehzahl, bewohnbare Fläche und Segmentzahl nicht eingefroren.</p><small>Owner: GS-05 + GS-15</small></article>
+        <article><header><span>Schutzmasse</span><b>OPEN</b></header><strong>—</strong><p>Geschwindigkeitsabhängig; Staub, GCR und Sekundärstrahlung müssen gekoppelt werden.</p><small>Owner: GS-06</small></article>
+      </div>
     </section>
 
     <section id="architecture" class="panel-section">
@@ -140,8 +192,13 @@
     </section>
   </main>
 
+  <dialog id="solver-dialog" class="solver-dialog">
+    <form method="dialog"><button class="dialog-close" aria-label="Schließen">×</button></form>
+    <div id="solver-dialog-content"></div>
+  </dialog>
+
   <footer>
-    <span>GSRA-01 Control Center v0.1</span>
+    <span>GSRA-01 Control Center v0.2</span>
     <span>Öffentliche Visualisierung · privater Forschungskern getrennt</span>
     <a href="https://github.com/stefanhasselm74314-byte/GSRA-01-Control-Center">Public Repository</a>
   </footer>
